@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using algorithms_and_structures.Utils;
 
 namespace algorithms_and_structures.Structures.BalancedTree
 {
-    public partial class BalancedTree<T> : ITree<T>, IBalancedTree<T> where T : IComparable
+    public partial class BalancedTree<T> : ITree<T> where T : IComparable
     {
         public List<T> GetPreOrderList()
         {
@@ -42,32 +41,29 @@ namespace algorithms_and_structures.Structures.BalancedTree
         }
 
 
-        public void PrintSorted(string sortType)
+        public List<T> PrintSorted()
         {
             List<T> list = new List<T>();
             ConvertToList(this.Root, ref list);
 
-            //Write empty line
-            Console.WriteLine();
+            Console.WriteLine("\nAscending order\n");
 
-            switch (sortType)
+            foreach (var x in list.OrderBy(x => x))
             {
-                case Printer.SortType.Ascending:
-                    foreach (var item in list.OrderBy(x => x))
-                    {
-                        Console.Write(item + "  ");
-                    }
-                    break;
-                case Printer.SortType.Descending:
-                    foreach (var item in list.OrderByDescending(x => x))
-                    {
-                        Console.Write(item + "  ");
-                    }
-                    break;
-
+                Console.Write(x + " ");
             }
 
+            Console.WriteLine("\n\nDescending order\n");
+
+            foreach (var x in list.OrderByDescending(x => x))
+            {
+                Console.Write(x + " ");
+            }
+
+            return list.OrderBy(x => x).ToList();
+
         }
+
 
         public void InsertBalancedTree(BalancedTree<T> tree)
         {

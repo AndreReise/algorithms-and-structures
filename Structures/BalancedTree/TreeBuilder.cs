@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace algorithms_and_structures.Structures.BalancedTree
 {
-    public partial class BalancedTree<T> : ITree<T>, IBalancedTree<T> where T : IComparable
+    public partial class BalancedTree<T> : ITree<T> where T : IComparable
     {
         public TreeNode<T> Insert(TreeNode<T> node, T value)
         {
@@ -28,6 +28,7 @@ namespace algorithms_and_structures.Structures.BalancedTree
             else if (comparer == 0)
             {
                 _consistDuplicates = true;
+                _duplicatesList.Add(value);
                 node.Right = Insert(node.Right, value);
             }
 
@@ -87,9 +88,13 @@ namespace algorithms_and_structures.Structures.BalancedTree
                 //if node has one child or none
                 if (node.Left == null || node.Right == null)
                 {
-                    TreeNode<T> tmp;
+                    TreeNode<T> tmp = null;
 
-                    tmp = node.Left == null ? node.Right : node.Left;
+//                    tmp = node.Left == null ? node.Right : node.Left;
+                    if (tmp == node.Left)
+                        tmp = node.Right;
+                    else
+                        tmp = node.Left;
 
                     //no child
                     if (tmp == null)

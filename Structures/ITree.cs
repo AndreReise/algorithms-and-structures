@@ -7,7 +7,7 @@ namespace algorithms_and_structures.Structures
     interface ITree<T> where  T : IComparable
     {
         bool Search(T value);
-        void PrintSorted(string sortType);
+        List<T> PrintSorted();
 
         /// <summary>
         /// Finds the sum of right key`s of specified node

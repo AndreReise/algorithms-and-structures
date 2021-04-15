@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using algorithms_and_structures.Structures.BalancedTree;
-using algorithms_and_structures.Utils;
+
 
 namespace algorithms_and_structures
 {
@@ -19,22 +19,11 @@ namespace algorithms_and_structures
                 tree.Root = tree.Insert(tree.Root, item);
             }
 
-            tree.PrintPreOrder();
-            Console.WriteLine();
+            tree.PrintSorted();
 
-            tree.Root = tree.DeleteNode(tree.Root, 10);
-            tree.PrintPreOrder();
+            tree.Root = tree.DeleteNode(tree.Root, -1);
 
-            var newTree = new BalancedTree<int>();
-            newTree.Root = newTree.Insert(newTree.Root, 77);
-            newTree.Root = newTree.Insert(newTree.Root, 7);
-            newTree.Root = newTree.Insert(newTree.Root, 8);
-
-            //tree.InsertBalancedTree(newTree);
-            Console.WriteLine("New tree : ");
-            tree.PrintSorted(Printer.SortType.Ascending);
-
-            var fn = tree.Equals(newTree);
+            tree.PrintSorted();
 
         }
     }
