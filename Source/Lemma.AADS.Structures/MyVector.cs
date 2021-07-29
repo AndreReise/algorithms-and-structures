@@ -43,7 +43,7 @@ namespace Lemma.AADS.Structures
             set => this.Update(value, index);
         }
 
-        public int Size() => _count + 1;
+        public int Size() => _count;
 
         public void Add(T entity)
         {
@@ -87,9 +87,12 @@ namespace Lemma.AADS.Structures
 
         public void Insert(T entity, int index)
         {
+            if (index < -1 || index >= _count)
+                throw new ArgumentException("Index must be included in {-1; ... ; count - 1;}");
+
             _version++;
 
-            if (_count + 1 == _capacity)
+            if (_count + 1 >= _capacity)
             {
                 Resize();
             }
